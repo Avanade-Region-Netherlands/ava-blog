@@ -5,17 +5,19 @@
 require('dotenv').config();
 
 const express = require('express');
+const expressLayout = require('express-ejs-layouts');
+
 const app = express();
 const port = process.env.PORT || 5000;
 
-/**
- * Handles GET requests to the root URL.
- * @param {Object} req - The request object.
- * @param {Object} res - The response object.
- */
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
+app.use(express.static('public'));
+
+//Templating Engine
+app.use(expressLayout);
+app.set('layout', './layouts/main');
+app.set('view engine', 'ejs');	
+
+app.use('/', require('./server/routes/main'));
 
 /**
  * Starts the server and listens on the specified port.
