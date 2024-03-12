@@ -9,7 +9,20 @@ router.use(express.static('public'));
  * @param {Object} res - The response object.
  */
 router.get('/', (req, res) => {
-  res.send('Hello, world!');
+  const locals = {
+    title: "AVA Blog",
+    description: "A simple blog application using Node.js, Express, and Ejs."
+  }
+  res.render('index', locals);
+});
+
+/**
+ * Handles GET requests to the about page.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ */
+router.get('/about', (req, res) => {
+  res.render('about', { title: 'About' });
 });
 
 module.exports = router;
